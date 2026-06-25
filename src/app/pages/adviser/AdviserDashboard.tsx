@@ -5,12 +5,13 @@ import { useOJT } from '../../context/OJTContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
 import { Button } from '../../components/ui/button';
 import { Badge } from '../../components/ui/badge';
-import { 
-  Users, 
-  Clock, 
-  FileCheck, 
-  Award, 
-  ArrowRight, 
+import {
+  Users,
+  Clock,
+  FileCheck,
+  Award,
+  ArrowRight,
+  ChevronRight,
   Calendar,
   AlertTriangle,
   ClipboardList
@@ -26,7 +27,7 @@ export function AdviserDashboard() {
 
   // Compute metrics
   const totalCount = assignedStudents.length;
-  
+
   // Pending approvals
   let pendingTaskCount = 0;
   let pendingJournalCount = 0;
@@ -68,66 +69,107 @@ export function AdviserDashboard() {
           <CardHeader className="pb-2">
             <CardDescription className="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center justify-between">
               Assigned Interns
-              <Users className="h-4.5 w-4.5 text-slate-400" />
+              <div className="h-8 w-8 rounded-md bg-blue-100 flex items-center justify-center">
+                <Users className="h-4.5 w-4.5 text-blue-600" />
+              </div>
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <span className="text-3xl font-extrabold text-slate-900">{totalCount}</span>
-            <span className="text-xs text-slate-500 font-medium ml-1">students</span>
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="text-3xl font-extrabold text-slate-900">{totalCount}</span>
+                <span className="text-xs text-slate-500 font-medium ml-1">students</span>
+              </div>
+              <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-100 border-none font-bold">+2 New</Badge>
+            </div>
             <p className="text-[10px] text-slate-400 mt-4 font-medium">Monitoring BSIT and BSCpE cohorts</p>
           </CardContent>
         </Card>
 
         {/* Pending Journals */}
-        <Card className="shadow-sm border-slate-200">
+        <Card className="shadow-sm border-slate-200 flex flex-col">
           <CardHeader className="pb-2">
             <CardDescription className="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center justify-between">
               Pending Journals
-              <Clock className="h-4.5 w-4.5 text-slate-400" />
+              <div className="h-8 w-8 rounded-md bg-amber-100 flex items-center justify-center">
+                <Clock className="h-4.5 w-4.5 text-amber-600" />
+              </div>
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <span className="text-3xl font-extrabold text-slate-900">{pendingJournalCount}</span>
-            <span className="text-xs text-slate-500 font-medium ml-1">to review</span>
-            {pendingJournalCount > 0 && (
-              <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-100 border-amber-200 text-[9px] scale-90 mt-3.5 block font-bold text-center w-24">
-                Needs Review
-              </Badge>
-            )}
+          <CardContent className="flex-1 flex flex-col">
+            <div>
+              <span className="text-3xl font-extrabold text-slate-900">{pendingJournalCount}</span>
+              <span className="text-xs text-slate-500 font-medium ml-1">to review</span>
+            </div>
+            <p className="text-[10px] text-slate-400 mt-1 mb-3 font-medium">Weekly journal submission requires validation</p>
+            <div className="mt-auto flex items-center justify-between">
+              {pendingJournalCount > 0 ? (
+                <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-100 border-none text-[10px] font-bold">
+                  Needs Review
+                </Badge>
+              ) : <span />}
+              {/* Changed color from amber to maroon */}
+              <Button size="sm" onClick={() => navigate('/adviser/journals')} className="h-7 px-2 text-[10px] bg-[#800000] hover:bg-[#600000] text-white font-semibold">
+                Review Now <ArrowRight className="h-3 w-3 ml-1" />
+              </Button>
+            </div>
           </CardContent>
         </Card>
 
         {/* Completed Hours */}
-        <Card className="shadow-sm border-slate-200">
+        <Card className="shadow-sm border-slate-200 flex flex-col">
           <CardHeader className="pb-2">
             <CardDescription className="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center justify-between">
               Hours Completed
-              <FileCheck className="h-4.5 w-4.5 text-slate-400" />
+              <div className="h-8 w-8 rounded-md bg-emerald-100 flex items-center justify-center">
+                <FileCheck className="h-4.5 w-4.5 text-emerald-600" />
+              </div>
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <span className="text-3xl font-extrabold text-slate-900">{completedHoursCount}</span>
-            <span className="text-xs text-slate-500 font-medium ml-1">interns</span>
-            <p className="text-[10px] text-slate-400 mt-4 font-medium">Met 480 hours required duration</p>
+          <CardContent className="flex-1 flex flex-col">
+            <div>
+              <span className="text-3xl font-extrabold text-slate-900">{completedHoursCount}</span>
+              <span className="text-xs text-slate-500 font-medium ml-1">intern met 480 hrs</span>
+            </div>
+            <p className="text-[10px] text-slate-400 mt-1 mb-2 font-medium">Internship requirement completed</p>
+            <div className="w-full bg-slate-100 rounded-full h-1.5 mb-3">
+              <div className="bg-emerald-500 h-1.5 rounded-full" style={{ width: '100%' }}></div>
+            </div>
+            <div className="mt-auto text-right">
+              <Button size="sm" variant="outline" className="h-7 text-[10px] text-emerald-700 border-emerald-200 hover:bg-emerald-50 font-semibold">
+                Details
+              </Button>
+            </div>
           </CardContent>
         </Card>
 
         {/* Portfolios for Review */}
-        <Card className="shadow-sm border-slate-200">
+        <Card className="shadow-sm border-slate-200 flex flex-col">
           <CardHeader className="pb-2">
             <CardDescription className="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center justify-between">
               Portfolio Reviews
-              <Award className="h-4.5 w-4.5 text-slate-400" />
+              <div className="h-8 w-8 rounded-md flex items-center justify-center" style={{ backgroundColor: '#ede0e2' }}>
+                <Award className="h-4.5 w-4.5 text-[#6b1d2a]" />
+              </div>
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <span className="text-3xl font-extrabold text-slate-900">{pendingPortfolioCount}</span>
-            <span className="text-xs text-slate-500 font-medium ml-1">awaiting</span>
-            {pendingPortfolioCount > 0 && (
-              <Badge className="bg-red-100 text-red-800 hover:bg-red-100 border-red-250 text-[9px] scale-90 mt-3.5 block font-bold text-center w-24">
-                Awaiting Endorsement
-              </Badge>
-            )}
+          <CardContent className="flex-1 flex flex-col">
+            <div>
+              <span className="text-3xl font-extrabold text-slate-900">{pendingPortfolioCount}</span>
+              <span className="text-xs text-slate-500 font-medium ml-1">waiting</span>
+            </div>
+            <p className="text-[10px] text-slate-400 mt-1 mb-3 font-medium">Student portfolio pending endorsement</p>
+            <div className="mt-auto flex items-center justify-between">
+              {pendingPortfolioCount > 0 ? (
+                <Badge className="bg-[#800000] text-white hover:bg-[#800000] border-none text-[10px] font-bold rounded-full px-3">
+                  Awaiting Endorsement
+                </Badge>
+              ) : <span />}
+              {/* Changed color from amber to maroon */}
+              <Button size="sm" onClick={() => navigate('/adviser/portfolio')} className="h-7 px-2 text-[10px] bg-[#800000] hover:bg-[#600000] text-white font-semibold">
+                Review Now <ArrowRight className="h-3 w-3 ml-1" />
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -172,20 +214,21 @@ export function AdviserDashboard() {
                           </Badge>
                         )}
                         {needsPortfolio && (
-                          <Badge variant="outline" className="text-[10px] font-semibold text-purple-700 border-purple-200 bg-purple-50">
+                          <Badge className="text-[10px] font-semibold text-[#6b1d2a] border border-[#6b1d2a] rounded-full px-3" style={{ backgroundColor: '#ede0e2' }}>
                             Portfolio Submission
                           </Badge>
                         )}
-                        <Button 
+                        {/* Changed color from amber to maroon */}
+                        <Button
                           size="sm"
                           onClick={() => {
                             if (sJournals.length > 0) navigate('/adviser/journals');
                             else if (needsPortfolio) navigate('/adviser/portfolio');
                             else navigate('/adviser/tasks');
                           }}
-                          className="bg-[#800000] hover:bg-[#6b0000] text-white text-[10px] h-7 font-semibold"
+                          className="bg-[#800000] hover:bg-[#600000] text-white text-[10px] h-7 px-2 font-semibold"
                         >
-                          Review <ArrowRight className="h-3 w-3 ml-1" />
+                          Review Now <ArrowRight className="h-3 w-3 ml-1" />
                         </Button>
                       </div>
                     </div>
@@ -243,8 +286,4 @@ export function AdviserDashboard() {
       </div>
     </div>
   );
-}
-
-function ChevronRight({ className }: { className?: string }) {
-  return <ArrowRight className={className} />;
 }

@@ -223,7 +223,7 @@ export function Layout({ children }: LayoutProps) {
               <Input
                 type="search"
                 placeholder="Search metrics, reports..."
-                className="pl-10 bg-slate-50 border-slate-200 rounded-lg focus-visible:ring-[#800000]"
+                className="pl-10 bg-slate-50 border-slate-200 text-slate-900 caret-slate-900 rounded-lg focus-visible:ring-[#800000]"
               />
             </div>
           </div>
