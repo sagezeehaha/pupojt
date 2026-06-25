@@ -249,37 +249,37 @@ export function AdviserDashboard() {
             <Button
               variant="outline"
               onClick={() => navigate('/adviser/students')}
-              className="w-full text-xs h-11 border-slate-200 text-slate-700 flex justify-between items-center px-4 hover:bg-slate-50 cursor-pointer"
+              className="group w-full text-xs h-11 border-slate-200 text-slate-700 flex justify-between items-center px-4 hover:bg-slate-50 hover:text-[#800000] cursor-pointer transition-colors"
             >
-              <span className="flex items-center gap-2">
-                <Users className="h-4 w-4 text-slate-500" />
+              <span className="flex items-center gap-2 group-hover:text-[#800000]">
+                <Users className="h-4 w-4 text-slate-500 group-hover:text-[#800000] transition-colors" />
                 Student Monitoring Board
               </span>
-              <ChevronRight className="h-4 w-4 text-slate-400" />
+              <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-[#800000] transition-colors" />
             </Button>
 
             <Button
               variant="outline"
               onClick={() => navigate('/adviser/attendance')}
-              className="w-full text-xs h-11 border-slate-200 text-slate-700 flex justify-between items-center px-4 hover:bg-slate-50 cursor-pointer"
+              className="group w-full text-xs h-11 border-slate-200 text-slate-700 flex justify-between items-center px-4 hover:bg-slate-50 hover:text-[#800000] cursor-pointer transition-colors"
             >
-              <span className="flex items-center gap-2">
-                <Calendar className="h-4 w-4 text-slate-500" />
+              <span className="flex items-center gap-2 group-hover:text-[#800000]">
+                <Calendar className="h-4 w-4 text-slate-500 group-hover:text-[#800000] transition-colors" />
                 Attendance Monitor Calendar
               </span>
-              <ChevronRight className="h-4 w-4 text-slate-400" />
+              <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-[#800000] transition-colors" />
             </Button>
 
             <Button
               variant="outline"
               onClick={() => navigate('/adviser/evaluation')}
-              className="w-full text-xs h-11 border-slate-200 text-slate-700 flex justify-between items-center px-4 hover:bg-slate-50 cursor-pointer"
+              className="group w-full text-xs h-11 border-slate-200 text-slate-700 flex justify-between items-center px-4 hover:bg-slate-50 hover:text-[#800000] cursor-pointer transition-colors"
             >
-              <span className="flex items-center gap-2">
-                <Award className="h-4 w-4 text-slate-500" />
+              <span className="flex items-center gap-2 group-hover:text-[#800000]">
+                <Award className="h-4 w-4 text-slate-500 group-hover:text-[#800000] transition-colors" />
                 Intern Midterm & Final Grades
               </span>
-              <ChevronRight className="h-4 w-4 text-slate-400" />
+              <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-[#800000] transition-colors" />
             </Button>
           </CardContent>
         </Card>
